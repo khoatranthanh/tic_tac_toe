@@ -12,11 +12,24 @@ module Api::V1
       end
 
       if game.won?
+        winner = game.winner == "O" ? "Computer" : "You"
         render json: {
           status: 200,
           result: {
             cells: cells,
-            final: "Win"
+            final: "Over",
+            winner: winner
+          }
+        } and return
+      end
+
+      if game.draw?
+        render json: {
+          status: 200,
+          result: {
+            cells: cells,
+            final: "Over",
+            winner: "DRAW"
           }
         } and return
       end

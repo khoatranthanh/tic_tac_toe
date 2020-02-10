@@ -10,6 +10,7 @@ require("channels")
 
 import Vue from 'vue'
 import App from '../app.vue'
+import 'bootstrap/dist/css/bootstrap.css';
 Vue.use(require('vue-cookies'))
 
 document.addEventListener('DOMContentLoaded', () => {
