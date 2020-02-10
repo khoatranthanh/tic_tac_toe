@@ -24,6 +24,15 @@
         <h2>Computer O</h2>
         <h2 v-if="over">
           Winner is: {{winner}}
+          <button class="btn btn-primary" v-on:click="reset()">
+            Reset
+          </button>
+        </h2>
+        <h2 v-if="draw">
+          Draw
+          <button class="btn btn-primary" v-on:click="reset()">
+            Reset
+          </button>
         </h2>
       </div>
     </div>
@@ -37,7 +46,8 @@ export default {
     return {
       cells: [],
       over: false,
-      winner: ""
+      winner: "",
+      draw: false
     }
   },
   created() {
@@ -59,6 +69,21 @@ export default {
           this.over = true
           this.winner = response.data.result.winner
         }
+        if(response.data.result.final == "Draw") {
+          this.draw = true
+        }
+      })
+      .catch(e => {
+
+      })
+    },
+    reset: function() {
+      axios.get('/api/v1/boards')
+      .then(response => {
+        this.cells = response.data.result.board.cells
+        this.$cookies.set('game', response.data.result);
+        this.over = false
+        this.draw = false
       })
       .catch(e => {
 

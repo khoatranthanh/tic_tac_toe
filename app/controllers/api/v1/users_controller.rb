@@ -7,7 +7,7 @@ module Api::V1
 
       cells = game.turn(input)
 
-      unless game.won?
+      unless game.over?
         cells = game.turn
       end
 
@@ -28,8 +28,7 @@ module Api::V1
           status: 200,
           result: {
             cells: cells,
-            final: "Over",
-            winner: "DRAW"
+            final: "Draw"
           }
         } and return
       end
