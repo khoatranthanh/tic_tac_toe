@@ -10,6 +10,7 @@ require("channels")
 
 import Vue from 'vue'
 import App from '../app.vue'
+Vue.use(require('vue-cookies'))
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
